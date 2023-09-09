@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Booking } from '../booking';
-import { BOOKINGS } from '../mock-bookings';
+import { BookingService } from '../booking.service';
+
+
 @Component({
   selector: 'app-bookings',
   templateUrl: './bookings.component.html',
@@ -8,17 +10,19 @@ import { BOOKINGS } from '../mock-bookings';
 })
 export class BookingsComponent implements OnInit {
 
-  constructor(){}
+  constructor(private bookingService:BookingService){}
 
-  bookings = BOOKINGS;
+  bookings : Booking[] = [];
 
   ngOnInit(): void {
-    
+    this.bookingService.getBookings().subscribe((result) => {
+      this.bookings = result;
+    });
   }
 
   deletBooking(booking: Booking): void{
-    var index = BOOKINGS.indexOf(booking);
-    BOOKINGS.splice(index, 1);
+    this.bookingService.deletBooking(booking).subscribe();
+    this.bookings = this.bookings.filter(b => b != booking);
   }
 
 }

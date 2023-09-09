@@ -1,5 +1,5 @@
-<div class="list-group" *ngFor="let booking of bookings">
-        <div class="list-group-item mb-2" aria-current="true">
+<div class="list-group " *ngFor="let booking of bookings">
+        <div class="list-group-item mb-2 bg-secondary text-white" aria-current="true">
         <div class="d-flex w-100 justify-content-between">
             <a routerLink="/edit-booking/{{booking.id}}"  class="mb-1 h5 text-decoration-none">{{booking.name}}</a>
             <button (click)="deletBooking(booking)"  class="btn btn-sm btn-danger">x</button>
